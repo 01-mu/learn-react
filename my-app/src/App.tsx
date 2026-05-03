@@ -22,6 +22,10 @@ function CountButton() {
   return <button onClick={handleClick}>Count: {count}</button>;
 }
 
+function SharedStateButton({ count, onClick }) {
+  return <button onClick={onClick}>Shared Count: {count}</button>;
+}
+
 function App() {
   type User = {
     name: string;
@@ -54,6 +58,9 @@ function App() {
     </li>
   ));
 
+  const [count, setCount] = useState(0);
+  const handleClick = () => setCount(count + 1);
+
   return (
     <>
       {isA ? <MyButtonA /> : <MyButtonB />}
@@ -67,8 +74,14 @@ function App() {
       />
       <ul>{listItems}</ul>
       <AlertButton />
-      <CountButton />
-      <CountButton />
+      <div>
+        <CountButton />
+        <CountButton />
+      </div>
+      <div>
+        <SharedStateButton count={count} onClick={handleClick} />
+        <SharedStateButton count={count} onClick={handleClick} />
+      </div>
     </>
   );
 }
