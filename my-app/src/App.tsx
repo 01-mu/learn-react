@@ -1,7 +1,11 @@
 import "./App.css";
 
-function MyButton() {
-  return <button>I'm a button</button>;
+function MyButtonA() {
+  return <button>I'm a button A</button>;
+}
+
+function MyButtonB() {
+  return <button>I'm a button B</button>;
 }
 
 function App() {
@@ -17,9 +21,25 @@ function App() {
     imageSize: 90,
   };
 
+  const isA = false;
+
+  type Product = {
+    title: string;
+    id: number;
+  };
+
+  const products: Product[] = [
+    { title: "Product 1", id: 1 },
+    { title: "Product 2", id: 2 },
+    { title: "Product 3", id: 3 },
+  ];
+
+  const listItems = products.map((product) => <li key={product.id}>{product.title}</li>);
+
   return (
     <>
-      <MyButton />
+      {isA ? <MyButtonA /> : <MyButtonB />}
+      {isA && <MyButtonA />}
       <h1>{user.name}</h1>
       <img
         className="avatar"
@@ -27,6 +47,7 @@ function App() {
         alt="avatar"
         style={{ width: `${user.imageSize}px`, height: `${user.imageSize}px` }}
       />
+      <ul>{listItems}</ul>
     </>
   );
 }
